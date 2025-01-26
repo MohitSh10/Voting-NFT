@@ -179,7 +179,8 @@ const Dashboard = () => {
           icon: <Wallet className="text-[#0096A0]" />,
           count: activePolls.length + pastPolls.length,
           title: "Polls Created",
-          bgClass: "bg-gradient-to-br from-[#0c0c20] to-[#0096A0]/20 hover:bg-[#0096A0]/10"
+          bgClass:
+            "bg-gradient-to-br from-[#0c0c20] to-[#0096A0]/20 hover:bg-[#0096A0]/10",
         },
         {
           icon: <CheckCircle className="text-[#00ffff]" />,
@@ -190,13 +191,15 @@ const Dashboard = () => {
             0
           ),
           title: "Total Votes",
-          bgClass: "bg-gradient-to-br from-[#0c0c20] to-[#00ffff]/20 hover:bg-[#00ffff]/10"
+          bgClass:
+            "bg-gradient-to-br from-[#0c0c20] to-[#00ffff]/20 hover:bg-[#00ffff]/10",
         },
         {
           icon: <Clock className="text-[#00ff00]" />,
           count: activePolls.length,
           title: "Active Polls",
-          bgClass: "bg-gradient-to-br from-[#0c0c20] to-[#00ff00]/20 hover:bg-[#00ff00]/10"
+          bgClass:
+            "bg-gradient-to-br from-[#0c0c20] to-[#00ff00]/20 hover:bg-[#00ff00]/10",
         },
       ].map((stat, index) => (
         <div
@@ -204,7 +207,9 @@ const Dashboard = () => {
           className={`${stat.bgClass} p-4 rounded-lg shadow-md text-center hover:scale-105 transition-transform border border-[#8a2be2]/30`}
         >
           {stat.icon}
-          <h3 className="font-bold text-xl mt-2 text-[#e0e0ff]">{stat.count}</h3>
+          <h3 className="font-bold text-xl mt-2 text-[#e0e0ff]">
+            {stat.count}
+          </h3>
           <p className="text-sm text-[#e0e0ff]/70">{stat.title}</p>
         </div>
       ))}
@@ -218,7 +223,9 @@ const Dashboard = () => {
           key={poll.id}
           className="bg-[#0c0c20] rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow border border-[#0096A0]/30"
         >
-          <h3 className="font-bold text-lg mb-2 text-[#00ffff]">{poll.title}</h3>
+          <h3 className="font-bold text-lg mb-2 text-[#00ffff]">
+            {poll.title}
+          </h3>
           <p className="text-[#e0e0ff]/70 mb-2">{poll.description}</p>
 
           {type === "active" && (
@@ -284,12 +291,13 @@ const Dashboard = () => {
             <h1 className="text-2xl font-bold text-[#00ffff]">Dashboard</h1>
           </div>
           <nav className="space-x-4">
-            <a href="/" className="hover:text-[#00ffff] flex items-center text-[#e0e0ff]">
+            <a
+              href="/"
+              className="hover:text-[#00ffff] flex items-center text-[#e0e0ff]"
+            >
               <Home className="mr-2" size={20} /> Home
             </a>
-            <a href="#" className="hover:text-[#00ffff] flex items-center text-[#e0e0ff]">
-              <Vote className="mr-2" size={20} /> Polls
-            </a>
+
             <button
               onClick={() => setShowVotingHistory(true)}
               className="hover:text-[#00ffff] flex items-center text-[#e0e0ff]"
