@@ -11,6 +11,9 @@ import {
   ChevronDown,
   ChevronUp,
   Rocket,
+  MessageCircle,
+  Send,
+  X
 } from "lucide-react";
 import Dashboard from "./components/Dashboard";
 
@@ -18,6 +21,12 @@ const HomePage = () => {
   const [walletConnected, setWalletConnected] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
   const [expandedFAQs, setExpandedFAQs] = useState({});
+  const [showSupportModal, setShowSupportModal] = useState(false);
+  const [supportForm, setSupportForm] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
   const platformFeatures = [
     {
@@ -79,6 +88,23 @@ const HomePage = () => {
       ...prev,
       [index]: !prev[index],
     }));
+  };
+
+  const handleSupportFormChange = (e) => {
+    const { name, value } = e.target;
+    setSupportForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSupportSubmit = (e) => {
+    e.preventDefault();
+    // Placeholder for form submission logic
+    console.log('Support form submitted:', supportForm);
+    alert('Message sent successfully!');
+    setSupportForm({ name: '', email: '', message: '' });
+    setShowSupportModal(false);
   };
 
   const handleConnectWallet = async () => {
@@ -145,7 +171,7 @@ const HomePage = () => {
             {platformFeatures.map((feature, index) => (
               <div
                 key={index}
-                className={`bg-gradient-to-br h-1 ${feature.gradient} rounded-2xl p-6 transform transition hover:scale-105 hover:shadow-2xl`}
+                className={`bg-gradient-to-br ${feature.gradient} rounded-2xl p-6 transform transition hover:scale-105 hover:shadow-2xl`}
               >
                 <div className="flex items-center mb-4">
                   {feature.icon}
@@ -237,10 +263,86 @@ const HomePage = () => {
 
       {/* Footer */}
       <footer className="bg-white shadow-md py-4">
-        <div className="container mx-auto px-4 text-center text-gray-600">
-          © 2024 Decentralized Polling Platform
+        <div className="container mx-auto px-4 flex justify-between items-center">
+          <div className="text-gray-600">
+            © 2024 Decentralized Polling Platform
+          </div>
+          <button 
+            onClick={() => setShowSupportModal(true)}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 flex items-center"
+          >
+            <MessageCircle className="mr-2" /> Contact Support
+          </button>
         </div>
       </footer>
+
+      {/* Support Modal */}
+      {showSupportModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-bold flex items-center">
+                <MessageCircle className="mr-3 text-blue-600" /> Contact Support
+              </h2>
+              <button 
+                onClick={() => setShowSupportModal(false)}
+                className="text-gray-500 hover:text-gray-800"
+              >
+                <X />
+              </button>
+            </div>
+
+            <form onSubmit={handleSupportSubmit} className="space-y-4">
+              <div>
+                <label className="block text-gray-700 font-bold mb-2">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={supportForm.name}
+                  onChange={handleSupportFormChange}
+                  placeholder="Your Name"
+                  required
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-blue-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-bold mb-2">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={supportForm.email}
+                  onChange={handleSupportFormChange}
+                  placeholder="your.email@example.com"
+                  required
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-blue-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-bold mb-2">Message</label>
+                <textarea
+                  name="message"
+                  value={supportForm.message}
+                  onChange={handleSupportFormChange}
+                  placeholder="Your message or support request"
+                  required
+                  rows="4"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-blue-500"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center"
+              >
+                <Send className="mr-2" /> Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+      
     </div>
   );
 };
