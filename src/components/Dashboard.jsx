@@ -176,13 +176,13 @@ const Dashboard = () => {
     <div className="grid grid-cols-3 gap-4 mb-6">
       {[
         {
-          icon: <Wallet className="text-blue-600" />,
+          icon: <Wallet className="text-[#0096A0]" />,
           count: activePolls.length + pastPolls.length,
           title: "Polls Created",
-          bgColor: "bg-blue-100",
+          bgClass: "bg-gradient-to-br from-[#0c0c20] to-[#0096A0]/20 hover:bg-[#0096A0]/10"
         },
         {
-          icon: <CheckCircle className="text-green-600" />,
+          icon: <CheckCircle className="text-[#00ffff]" />,
           count: activePolls.reduce(
             (total, poll) =>
               total +
@@ -190,22 +190,22 @@ const Dashboard = () => {
             0
           ),
           title: "Total Votes",
-          bgColor: "bg-green-100",
+          bgClass: "bg-gradient-to-br from-[#0c0c20] to-[#00ffff]/20 hover:bg-[#00ffff]/10"
         },
         {
-          icon: <Clock className="text-purple-600" />,
+          icon: <Clock className="text-[#00ff00]" />,
           count: activePolls.length,
           title: "Active Polls",
-          bgColor: "bg-purple-100",
+          bgClass: "bg-gradient-to-br from-[#0c0c20] to-[#00ff00]/20 hover:bg-[#00ff00]/10"
         },
       ].map((stat, index) => (
         <div
           key={index}
-          className={`${stat.bgColor} p-4 rounded-lg shadow-md text-center hover:scale-105 transition-transform`}
+          className={`${stat.bgClass} p-4 rounded-lg shadow-md text-center hover:scale-105 transition-transform border border-[#8a2be2]/30`}
         >
           {stat.icon}
-          <h3 className="font-bold text-xl mt-2">{stat.count}</h3>
-          <p className="text-sm text-gray-600">{stat.title}</p>
+          <h3 className="font-bold text-xl mt-2 text-[#e0e0ff]">{stat.count}</h3>
+          <p className="text-sm text-[#e0e0ff]/70">{stat.title}</p>
         </div>
       ))}
     </div>
@@ -216,26 +216,26 @@ const Dashboard = () => {
       {polls.map((poll) => (
         <div
           key={poll.id}
-          className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow"
+          className="bg-[#0c0c20] rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow border border-[#0096A0]/30"
         >
-          <h3 className="font-bold text-lg mb-2">{poll.title}</h3>
-          <p className="text-gray-600 mb-2">{poll.description}</p>
+          <h3 className="font-bold text-lg mb-2 text-[#00ffff]">{poll.title}</h3>
+          <p className="text-[#e0e0ff]/70 mb-2">{poll.description}</p>
 
           {type === "active" && (
             <>
-              <div className="text-sm text-gray-500 mb-2">
+              <div className="text-sm text-[#e0e0ff]/50 mb-2">
                 Ends: {poll.endDate}
               </div>
               <div className="flex space-x-2">
                 <button
                   onClick={() => onViewDetails(poll)}
-                  className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors"
+                  className="w-full bg-[#C154C1] text-[#0c0c20] py-2 rounded-md hover:bg-[#0096A0]/80 transition-colors"
                 >
                   View Details
                 </button>
                 <button
                   onClick={() => onVote(poll)}
-                  className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition-colors"
+                  className="w-full bg-[#00ffff] text-[#0c0c20] py-2 rounded-md hover:bg-[#00ffff]/80 transition-colors"
                 >
                   Vote
                 </button>
@@ -245,7 +245,7 @@ const Dashboard = () => {
 
           {type === "past" && (
             <div className="mt-2">
-              <h4 className="font-semibold mb-2">Results:</h4>
+              <h4 className="font-semibold mb-2 text-[#e0e0ff]">Results:</h4>
               {Object.entries(poll.votes || {}).map(([option, votes]) => {
                 const totalVotes = Object.values(poll.votes || {}).reduce(
                   (a, b) => a + b,
@@ -256,13 +256,13 @@ const Dashboard = () => {
 
                 return (
                   <div key={option} className="flex items-center mb-1">
-                    <div className="w-full bg-gray-200 rounded-full h-2.5 mr-2">
+                    <div className="w-full bg-[#06060f] rounded-full h-2.5 mr-2">
                       <div
-                        className="bg-blue-600 h-2.5 rounded-full"
+                        className="bg-[#00ffff] h-2.5 rounded-full"
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>
-                    <span className="text-sm text-gray-600">
+                    <span className="text-sm text-[#e0e0ff]/70">
                       {option}: {percentage}% ({votes} votes)
                     </span>
                   </div>
@@ -276,23 +276,23 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      <header className="bg-white shadow-md">
+    <div className="min-h-screen bg-[#06060f] text-[#e0e0ff] flex flex-col">
+      <header className="bg-[#0c0c20] shadow-md border-b border-[#00ffff]/20">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <PieChart className="text-blue-600" />
-            <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
+            <PieChart className="text-[#00ffff] animate-pulse" />
+            <h1 className="text-2xl font-bold text-[#00ffff]">Dashboard</h1>
           </div>
           <nav className="space-x-4">
-            <a href="/" className="hover:text-blue-600 flex items-center">
+            <a href="/" className="hover:text-[#00ffff] flex items-center text-[#e0e0ff]">
               <Home className="mr-2" size={20} /> Home
             </a>
-            <a href="#" className="hover:text-blue-600 flex items-center">
+            <a href="#" className="hover:text-[#00ffff] flex items-center text-[#e0e0ff]">
               <Vote className="mr-2" size={20} /> Polls
             </a>
             <button
               onClick={() => setShowVotingHistory(true)}
-              className="hover:text-blue-600 flex items-center"
+              className="hover:text-[#00ffff] flex items-center text-[#e0e0ff]"
             >
               <History className="mr-2" size={20} /> Voting History
             </button>
@@ -304,7 +304,7 @@ const Dashboard = () => {
         <div className="flex justify-end mb-4">
           <button
             onClick={() => setShowCreatePoll(true)}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center"
+            className="bg-[#0096A0] text-[#0c0c20] px-4 py-2 rounded-md hover:bg-[#0096A0]/80 flex items-center"
           >
             <PlusCircle className="mr-2" /> Create New Poll
           </button>
@@ -312,15 +312,15 @@ const Dashboard = () => {
 
         <UserStats />
 
-        <div className="mb-4 border-b flex">
+        <div className="mb-4 border-b border-[#8a2be2]/30 flex">
           {["active", "past"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-4 py-2 ${
                 activeTab === tab
-                  ? "border-b-2 border-blue-500 text-blue-500"
-                  : "text-gray-500"
+                  ? "border-b-2 border-[#00ffff] text-[#00ffff]"
+                  : "text-[#e0e0ff]/70"
               }`}
             >
               {tab === "active" ? "Active Polls" : "Past Polls"}
@@ -336,8 +336,8 @@ const Dashboard = () => {
         />
       </main>
 
-      <footer className="bg-white shadow-md py-4">
-        <div className="container mx-auto px-4 text-center text-gray-600">
+      <footer className="bg-[#0c0c20] py-4 border-t border-[#00ffff]/20">
+        <div className="container mx-auto px-4 text-center text-[#e0e0ff]/70">
           © 2024 Decentralized Polling Platform
         </div>
       </footer>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Plus, Trash2, Send } from "lucide-react";
 
-const PollCreationPage = ({ onClose, onSubmit }) => {
+const CyberpunkPollCreationPage = ({ onClose, onSubmit }) => {
   const [pollTitle, setPollTitle] = useState("");
   const [pollDescription, setPollDescription] = useState("");
   const [options, setOptions] = useState(["", ""]);
@@ -41,23 +41,23 @@ const PollCreationPage = ({ onClose, onSubmit }) => {
 
   if (isSubmitted) {
     return (
-      <div className="bg-white p-8 rounded-lg shadow-md text-center">
-        <h2 className="text-2xl font-bold text-green-600 mb-4">
-          Poll Created Successfully!
+      <div className="bg-black text-green-400 font-mono p-8 border-2 border-green-600 rounded-lg shadow-neon">
+        <h2 className="text-2xl font-bold text-green-300 mb-4 glitch-text">
+          Poll Uploaded to Blockchain
         </h2>
-        <p className="text-gray-600 mb-6">
-          Your poll has been created and is now live on the blockchain.
+        <p className="text-green-500 mb-6 opacity-80">
+          Data transmission complete. Poll synchronized across decentralized networks.
         </p>
         <div className="flex justify-center space-x-4">
           <button
             onClick={() => setIsSubmitted(false)}
-            className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600"
+            className="bg-green-600 text-black px-6 py-2 rounded-lg hover:bg-green-400 transition-all duration-300 cyber-button"
           >
             Create Another Poll
           </button>
           <button
             onClick={onClose}
-            className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600"
+            className="bg-purple-700 text-white px-6 py-2 rounded-lg hover:bg-purple-500 transition-all duration-300 cyber-button"
           >
             Return to Dashboard
           </button>
@@ -67,13 +67,15 @@ const PollCreationPage = ({ onClose, onSubmit }) => {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen p-8">
-      <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+    <div className="bg-black min-h-screen p-8 text-green-400 font-mono">
+      <div className="max-w-2xl mx-auto bg-gray-900 p-8 rounded-lg border-2 border-green-600 shadow-neon">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Create New Poll</h1>
+          <h1 className="text-3xl font-bold text-green-300 glitch-text">
+            Create New Poll
+          </h1>
           <button
             onClick={onClose}
-            className="text-gray-600 hover:text-gray-800"
+            className="text-red-400 hover:text-red-600 cyber-button"
           >
             Close
           </button>
@@ -81,7 +83,7 @@ const PollCreationPage = ({ onClose, onSubmit }) => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="pollTitle" className="block mb-2 font-semibold">
+            <label htmlFor="pollTitle" className="block mb-2 text-green-500">
               Poll Title
             </label>
             <input
@@ -89,7 +91,7 @@ const PollCreationPage = ({ onClose, onSubmit }) => {
               value={pollTitle}
               onChange={(e) => setPollTitle(e.target.value)}
               required
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 bg-black text-green-400 border-2 border-green-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 cyber-input"
               placeholder="Enter poll title"
             />
           </div>
@@ -97,7 +99,7 @@ const PollCreationPage = ({ onClose, onSubmit }) => {
           <div>
             <label
               htmlFor="pollDescription"
-              className="block mb-2 font-semibold"
+              className="block mb-2 text-green-500"
             >
               Poll Description
             </label>
@@ -107,13 +109,13 @@ const PollCreationPage = ({ onClose, onSubmit }) => {
               onChange={(e) => setPollDescription(e.target.value)}
               required
               rows={4}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 bg-black text-green-400 border-2 border-green-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 cyber-input"
               placeholder="Provide context for your poll"
             />
           </div>
 
           <div>
-            <label className="block mb-2 font-semibold">
+            <label className="block mb-2 text-green-500">
               Poll Options (2-5 options)
             </label>
             {options.map((option, index) => (
@@ -122,14 +124,14 @@ const PollCreationPage = ({ onClose, onSubmit }) => {
                   value={option}
                   onChange={(e) => updateOption(index, e.target.value)}
                   required
-                  className="flex-grow px-3 py-2 border rounded-lg mr-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex-grow px-3 py-2 bg-black text-green-400 border-2 border-green-600 rounded-lg mr-2 focus:outline-none focus:ring-2 focus:ring-green-400 cyber-input"
                   placeholder={`Option ${index + 1}`}
                 />
                 {options.length > 2 && (
                   <button
                     type="button"
                     onClick={() => removeOption(index)}
-                    className="text-red-500 hover:bg-red-50 p-2 rounded-full"
+                    className="text-red-500 hover:bg-red-900 p-2 rounded-full cyber-button"
                   >
                     <Trash2 size={20} />
                   </button>
@@ -140,7 +142,7 @@ const PollCreationPage = ({ onClose, onSubmit }) => {
               <button
                 type="button"
                 onClick={addOption}
-                className="flex items-center text-blue-500 hover:bg-blue-50 px-3 py-2 rounded-lg"
+                className="flex items-center text-green-500 hover:bg-green-900 px-3 py-2 rounded-lg cyber-button"
               >
                 <Plus className="mr-2" /> Add Option
               </button>
@@ -149,14 +151,54 @@ const PollCreationPage = ({ onClose, onSubmit }) => {
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 flex items-center justify-center"
+            className="w-full bg-purple-700 text-white py-3 rounded-lg hover:bg-purple-500 transition-all duration-300 flex items-center justify-center cyber-button"
           >
             <Send className="mr-2" /> Create Poll
           </button>
         </form>
       </div>
+
+      <style jsx global>{`
+        body {
+          background-color: black;
+        }
+        .shadow-neon {
+          box-shadow: 0 0 10px rgba(0, 255, 0, 0.5), 
+                      0 0 20px rgba(0, 255, 0, 0.3), 
+                      0 0 40px rgba(0, 255, 0, 0.2);
+        }
+        .cyber-input {
+          transition: all 0.3s ease;
+        }
+        .cyber-input:focus {
+          box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        .cyber-button {
+          transition: all 0.3s ease;
+        }
+        .cyber-button:hover {
+          transform: scale(1.05);
+          box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        .glitch-text {
+          position: relative;
+          text-shadow: 
+            0 0 10px rgba(0, 255, 0, 0.5),
+            2px 2px rgba(0, 255, 0, 0.5),
+            -2px -2px rgba(255, 0, 0, 0.5);
+          animation: glitch 0.3s infinite;
+        }
+        @keyframes glitch {
+          0% { transform: translate(0); }
+          20% { transform: translate(-2px, 2px); }
+          40% { transform: translate(-2px, -2px); }
+          60% { transform: translate(2px, 2px); }
+          80% { transform: translate(2px, -2px); }
+          100% { transform: translate(0); }
+        }
+      `}</style>
     </div>
   );
 };
 
-export default PollCreationPage;
+export default CyberpunkPollCreationPage;
