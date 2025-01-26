@@ -145,7 +145,7 @@ const HomePage = () => {
             {platformFeatures.map((feature, index) => (
               <div
                 key={index}
-                className={`bg-gradient-to-br ${feature.gradient} rounded-2xl p-6 transform transition hover:scale-105 hover:shadow-2xl`}
+                className={`bg-gradient-to-br h-1 ${feature.gradient} rounded-2xl p-6 transform transition hover:scale-105 hover:shadow-2xl`}
               >
                 <div className="flex items-center mb-4">
                   {feature.icon}
